@@ -5,39 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asa's page</title>
-    <!-- CSS here -->
-    <style>
-        body {
-            background-color: #f0e2c3;
-            font-family: 'JetBrains Mono', monospace
-        }
-
-        a {
-            color: #82b2c0;
-        }
-
-        header {
-            background-color: #f2eae0;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <article>
         <header>
-            <h1>ASA DOT COM / Contact
-            </h1>
-            <nav>
-                <a href="index.html">Home</a> |
-                <a href="about.html">About</a> |
-                <a href="contact.html">Contact</a> |
-                <a href="game.html">Game</a>
-            </nav>
+            <div class="container header-inner">
+                <div class="brand">
+                    <img src="assets/asaicon.png" alt="Asa" class="avatar">
+                    <h1>ASA DOT COM <span class="small">/ Contact</span></h1>
+                </div>
+                <button class="menu-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="projects.html">Projects</a>
+                </nav>
+            </div>
         </header>
     </article>
 
     <h2>Asa's contacts</h2>
     <p>nothing here yet</p>
 </body>
+
+<script src="script.js" defer></script>
 
 </html>

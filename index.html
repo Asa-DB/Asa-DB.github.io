@@ -5,39 +5,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asa's page</title>
-    <!-- CSS here -->
-    <style>
-        body {
-            background-color: #f0e2c3;
-            font-family: 'JetBrains Mono', monospace
-        }
-
-        a {
-            color: #82b2c0;
-        }
-
-        header {
-            background-color: #f2eae0;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <article>
         <header>
-            <h1>ASA DOT COM
-            </h1>
-            <nav>
-                <a href="index.html">Home</a> |
-                <a href="about.html">About</a> |
-                <a href="contact.html">Contact</a> |
-                <a href="game.html">Game</a>
-            </nav>
+            <div class="container header-inner">
+                <div class="brand">
+                    <img src="assets/asaicon.png" alt="Asa" class="avatar">
+                    <h1>ASA DOT COM <span class="small">/ Home</span></h1>
+                </div>
+                <button class="menu-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="projects.html">Projects</a>
+                </nav>
+            </div>
         </header>
     </article>
 
-    <h2>Welcome to Asa's Page</h2>
-    <p>i am an evil >:3.</p>
+    <div class="container hero-wrap">
+        <div class="hero fade-in">
+            <div class="hero-left">
+                <h2 class="hero-heading">Heya! I'm Asa<span class="accent-text">。</span></h2>
+                <p class="hero-sub">Student dev • Retro Gamer • Weeb. Soon enough, I will take over the world.</p>
+                <div class="cta-row">
+                    <a href="projects.html" class="btn btn-primary">See Projects</a>
+                    <a href="contact.html" class="btn btn-ghost">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-card">
+                    <img src="assets/asaicon.png" alt="Asa"
+                        style="width:72px;height:72px;border-radius:10px;object-fit:cover">
+                    <p style="margin:0;font-weight:700;color:var(--color-deep)">Asa ✿ great dev</p>
+                    <p class="muted" style="margin:.35rem 0 0;font-size:.95rem">I am the greatest programmer on earth.
+                        That's why god chose me.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
 </body>
 
 </html>
