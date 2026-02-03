@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tetris - Waifu Edition</title>
+
+  <style>
+    /* maybe add themes later */
+    body {
+      background: #202028;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .game-container {
+      display: flex;
+      gap: 20px;
+      position: relative;
+    }
+
+    canvas {
+      background: #000;
+      border: 2px solid #333;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    #companion-area {
+      position: absolute;
+      left: -180px;
+      bottom: 20px;
+      width: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #companion-gif {
+      width: 140px;
+      height: auto;
+      filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    }
+
+    #speech-bubble {
+      background: #fff;
+      color: #000;
+      padding: 8px 12px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: 0.3s;
+      text-align: center;
+      min-width: 110px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    #speech-bubble:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 8px 8px 0;
+      border-style: solid;
+      border-color: #fff transparent;
+    }
+
+    .ui-panel {
+      display: flex;
+      flex-direction: column;
+      min-width: 100px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    .stat-value {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .mini-canvas {
+      border: 1px solid #444;
+      background: #111;
+      margin-bottom: 5px;
+    }
+
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.92);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      background: #fff;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      width: 240px;
+    }
+
+    .btn.secondary {
+      background: #444;
+      color: #fff;
+    }
+
+    #settings-panel,
+    #companion-panel {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+      width: 320px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    .companion-item {
+      background: #333;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 4px solid transparent;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+
+    .companion-item.active {
+      border-color: #ff0d72;
+      background: #444;
+    }
+
+    .setting-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    label {
+      font-size: 0.7rem;
+      color: #aaa;
+      text-transform: uppercase;
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="game-container">
+    <div id="companion-area">
+      <div id="speech-bubble">I lubb uu!</div>
+      <img id="companion-gif" src="fl_chan.gif" alt="">
+    </div>
+
+    <canvas id="tetris" width="240" height="400"></canvas>
+
+    <div class="ui-panel">
+      <div class="stat-label">SCORE</div>
+      <div id="score" class="stat-value">0</div>
+      <div class="stat-label">LEVEL</div>
+      <div id="level" class="stat-value">1</div>
+      <div class="stat-label">NEXT</div>
+      <canvas id="next" class="mini-canvas" width="80" height="80"></canvas>
+      <div class="stat-label">HOLD (C)</div>
+      <canvas id="hold" class="mini-canvas" width="80" height="80"></canvas>
+    </div>
+
+    <div id="overlay">
+      <div id="main-menu-panel" style="display:flex; flex-direction:column;">
+        <h1 style="margin: 0; font-size: 3rem;">TETRIS</h1>
+        <div style="color:#ff0d72; margin-bottom: 25px; font-weight: bold;">WAIFU EDITION</div>
+        <button id="primary-btn" class="btn" onclick="handlePrimaryBtn()">START GAME</button>
+        <button id="restart-btn" class="btn secondary" style="display:none;" onclick="startGame()">RESTART GAME</button>
+        <button class="btn secondary" onclick="openPanel('companion-panel')">COMPANIONS</button>
+        <button class="btn secondary" onclick="openPanel('settings-panel')">SETTINGS & COLORS</button>
+      </div>
+
+      <div id="companion-panel">
+        <h3 style="margin: 0 0 10px 0;">SELECT COMPANION</h3>
+        <div style="font-size:0.7rem; color:#aaa; margin-bottom:10px;">Pick your favorite waifu below</div>
+        <div id="companion-list"></div>
+        <button class="btn" style="margin-top:10px;" onclick="openPanel('main-menu-panel')">BACK</button>
+      </div>
+
+      <div id="settings-panel">
+        <h3>SETTINGSS</h3>
+        <div class="setting-item">
+          <label>Master Volume</label>
+          <input type="range" min="0" max="100" value="40" oninput="updateVolume(this.value)">
+        </div>
+        <hr style="border: 0; border-top: 1px solid #444; margin: 10px 0;">
+        <label>Piece Colorz</label>
+        <div id="color-pickers" class="color-grid"></div>
+        <div style="display:flex; gap: 5px; margin-top: 10px;">
+          <button class="btn secondary" style="font-size:0.7rem; width:100%" onclick="exportColors()">SAVE
+            COLORS</button>
+          <button class="btn secondary" style="font-size:0.7rem; width:100%"
+            onclick="document.getElementById('import-file').click()">LOAD COLORS</button>
+        </div>
+        <input type="file" id="import-file" style="display:none" accept=".txt" onchange="importColors(this)">
+        <button class="btn" style="margin-top:20px;" onclick="openPanel('main-menu-panel')">BACK</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // waifu data -- adding Anya and Chika to the list too -- add samisu or smith chan or whatever later make these cost pogs when you figure it out
+    const COMPANIONS = {
+      'FL Chan': { file: 'fl_chan.gif', phrases: ["You've got this!", "You're awesome!", "I lubb uu!", "Yay!", "Make me FL beats!"] },
+      'Miku': { file: 'miku.gif', phrases: ["Miku Miku Beam!", "Baka!!", "Leek power!", "Melody!"] },
+      'Kanna': { file: 'kanna.gif', phrases: ["Majiyabakune.", "Ame ame ame.", "Nom nom...", "Wicked."] },
+      'Anya': { file: 'anya.gif', phrases: ["Waku waku!", "Anya likes peanuts.", "Heh.", "Wah!"] },
+      'Chika': { file: 'chika.gif', phrases: ["Yo yo yo!", "Love Detective!", "Wah!?", "Dance dance!"] },
+      'Tohru': { file: 'tohru.gif', phrases: ["D is for Dragon!", "Eat my tail!", "Kobayashi-san!", "Moe moe kyun!"] }
+    };
+
+    const canvas = document.getElementById('tetris');
+    const ctx = canvas.getContext('2d');
+    const nextCtx = document.getElementById('next').getContext('2d');
+    const holdCtx = document.getElementById('hold').getContext('2d');
+
+    ctx.scale(20, 20);
+    nextCtx.scale(20, 20);
+    holdCtx.scale(20, 20);
+
+    const sounds = {
+      bgm: new Audio('music.mp3'),
+      move: new Audio('move.mp3'), rotate: new Audio('rotate.mp3'),
+      clear: new Audio('clear.mp3'), land: new Audio('land.mp3'),
+      gameover: new Audio('gameover.mp3')
+    };
+    sounds.bgm.loop = true;
+
+    // COLOR STUFF
+    let colors = [null, '#FF0D72', '#0DC2FF', '#0DFF72', '#F538FF', '#FF8E0D', '#3877FF', '#FFE138', '#555555'];
+    const PIECE_LABELS = [null, 'T', 'I', 'S', 'Z', 'L', 'J', 'O', 'GARBAGE'];
+
+    function initColorPickers() {
+      const container = document.getElementById('color-pickers');
+      container.innerHTML = '';
+      colors.forEach((color, i) => {
+        if (i === 0) return;
+        const div = document.createElement('div');
+        div.className = 'setting-item';
+        div.innerHTML = `<label style="font-size:0.6rem">${PIECE_LABELS[i]}</label>
+                         <input type="color" value="${color}" oninput="updateColor(${i}, this.value)">`;
+        container.appendChild(div);
+      });
+    }
+
+    function updateColor(index, val) { colors[index] = val; }
+
+    function exportColors() {
+      const blob = new Blob([JSON.stringify(colors)], { type: 'text/plain' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'tetris_colors.txt'; a.click();
+    }
+
+    function importColors(input) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        colors = JSON.parse(e.target.result);
+        initColorPickers();
+      };
+      reader.readAsText(input.files[0]);
+    }
+
+    let gameState = 'MENU';
+    let activeCompanion = 'FL Chan';
+    const arena = createMatrix(12, 20);
+    let lastTime = 0, dropCounter = 0, dropInterval = 1000;
+    const player = { pos: { x: 0, y: 0 }, matrix: null, score: 0, level: 1, lines: 0, holdPiece: null, canHold: true };
+
+    const keys = { ArrowLeft: { down: false, timer: 0 }, ArrowRight: { down: false, timer: 0 }, ArrowDown: { down: false, timer: 0 } };
+    const DAS_DELAY = 170; const DAS_SPEED = 50;
+
+    function createMatrix(w, h) {
+      const m = []; while (h--) m.push(new Array(w).fill(0)); return m;
+    }
+
+    function addGarbage() {
+      arena.shift();
+      const row = new Array(12).fill(8);
+      const hole = Math.floor(Math.random() * 12);
+      row[hole] = 0;
+      arena.push(row);
+    }
+
+    function collide(arena, player) {
+      if (!player.matrix) return false;
+      const [m, o] = [player.matrix, player.pos];
+      for (var y = 0; y < m.length; ++y) {
+        for (let x = 0; x < m[y].length; ++x) {
+          if (m[y][x] !== 0 && (arena[y + o.y] && arena[y + o.y][x + o.x]) !== 0) return true;
+        }
+      }
+      return false;
+    }
+
+    function cheer() {
+      const comp = COMPANIONS[activeCompanion];
+      const b = document.getElementById('speech-bubble');
+      b.innerText = comp.phrases[Math.floor(Math.random() * comp.phrases.length)];
+      b.style.opacity = '1'; b.style.transform = 'translateY(0px)';
+      setTimeout(() => { b.style.opacity = '0'; b.style.transform = 'translateY(10px)'; }, 2000);
+    }
+
+    function arenaSweep() {
+      let rowCount = 0;
+      outer: for (let y = arena.length - 1; y > 0; --y) {
+        for (let x = 0; x < arena[y].length; ++x) { if (arena[y][x] === 0) continue outer; }
+        arena.unshift(arena.splice(y, 1)[0].fill(0));
+        ++y; rowCount++;
+      }
+      if (rowCount > 0) {
+        player.score += rowCount * 10 * rowCount; player.lines += rowCount;
+        sounds.clear.play(); cheer();
+        const newLevel = Math.floor(player.lines / 10) + 1;
+        if (newLevel > player.level) {
+          player.level = newLevel;
+          addGarbage();
+        }
+        dropInterval = Math.pow(0.85, player.level - 1) * 1000;
+        document.getElementById('score').innerText = player.score;
+        document.getElementById('level').innerText = player.level;
+      }
+    }
+
+    const PIECES = {
+      'T': [[0, 1, 0], [1, 1, 1], [0, 0, 0]],
+      'I': [[0, 2, 0, 0], [0, 2, 0, 0], [0, 2, 0, 0], [0, 2, 0, 0]],
+      'S': [[0, 3, 3], [3, 3, 0], [0, 0, 0]],
+      'Z': [[4, 4, 0], [0, 4, 4], [0, 0, 0]],
+      'L': [[0, 5, 0], [0, 5, 0], [0, 5, 5]],
+      'J': [[0, 6, 0], [0, 6, 0], [6, 6, 0]],
+      'O': [[7, 7], [7, 7]],
+    };
+
+    let bag = [];
+    let pieceQueue = [];
+
+    function getNextPiece() {
+      if (bag.length === 0) bag = 'IJLOSTZ'.split('').sort(() => Math.random() - 0.5);
+      return PIECES[bag.pop()].map(r => [...r]);
+    }
+
+    function playerReset() {
+      if (pieceQueue.length === 0) pieceQueue = [getNextPiece(), getNextPiece()];
+      player.matrix = pieceQueue.shift();
+      pieceQueue.push(getNextPiece());
+      player.pos.y = 0;
+      player.pos.x = (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
+      player.canHold = true;
+      if (collide(arena, player)) {
+        console.log("u lost lol");
+        gameState = 'GAMEOVER'; sounds.bgm.pause(); sounds.gameover.play();
+        document.getElementById('overlay').style.display = 'flex';
+        document.getElementById('primary-btn').innerText = "RESTART";
+      }
+    }
+
+    function update(time = 0) {
+      let delta = time - lastTime; lastTime = time;
+      if (delta > 1000) delta = 16;
+      if (gameState === 'PLAYING') {
+        ['ArrowLeft', 'ArrowRight'].forEach(k => {
+          if (keys[k].down) {
+            if (keys[k].timer === 0) {
+              player.pos.x += (k === 'ArrowRight' ? 1 : -1);
+              if (collide(arena, player)) player.pos.x -= (k === 'ArrowRight' ? 1 : -1);
+              else sounds.move.play();
+            }
+            keys[k].timer += delta;
+            if (keys[k].timer > DAS_DELAY) {
+              if ((keys[k].timer - DAS_DELAY) % DAS_SPEED < delta) {
+                player.pos.x += (k === 'ArrowRight' ? 1 : -1);
+                if (collide(arena, player)) player.pos.x -= (k === 'ArrowRight' ? 1 : -1);
+                else sounds.move.play();
+              }
+            }
+          } else { keys[k].timer = 0; }
+        });
+        if (keys.ArrowDown.down) dropCounter += delta * 12; else dropCounter += delta;
+        if (dropCounter > dropInterval) {
+          player.pos.y++;
+          if (collide(arena, player)) { player.pos.y--; merge(); playerReset(); arenaSweep(); }
+          dropCounter = 0;
+        }
+      }
+      draw(); requestAnimationFrame(update);
+    }
+
+    function drawMatrix(tCtx, m, o) {
+      m.forEach((row, y) => {
+        row.forEach((v, x) => {
+          if (v !== 0) {
+            tCtx.fillStyle = colors[v]; tCtx.fillRect(x + o.x, y + o.y, 1, 1);
+            tCtx.lineWidth = 0.05; tCtx.strokeStyle = 'rgba(0,0,0,0.5)';
+            tCtx.strokeRect(x + o.x, y + o.y, 1, 1);
+          }
+        });
+      });
+    }
+
+    function draw() {
+      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = '#222'; ctx.lineWidth = 0.02;
+      for (let i = 0; i <= 12; i++) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 20); ctx.stroke(); }
+      for (let i = 0; i <= 20; i++) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(12, i); ctx.stroke(); }
+      drawMatrix(ctx, arena, { x: 0, y: 0 });
+      if (player.matrix) {
+        let g = { pos: { ...player.pos }, matrix: player.matrix };
+        while (!collide(arena, g)) g.pos.y++; g.pos.y--;
+        ctx.globalAlpha = 0.15; drawMatrix(ctx, g.matrix, g.pos); ctx.globalAlpha = 1.0;
+        drawMatrix(ctx, player.matrix, player.pos);
+      }
+      nextCtx.fillStyle = '#000'; nextCtx.fillRect(0, 0, 4, 4);
+      if (pieceQueue[0]) drawMatrix(nextCtx, pieceQueue[0], { x: (pieceQueue[0].length === 4 ? 0 : 0.5), y: 0.5 });
+      holdCtx.fillStyle = '#000'; holdCtx.fillRect(0, 0, 4, 4);
+      if (player.holdPiece) drawMatrix(holdCtx, player.holdPiece, { x: (player.holdPiece.length === 4 ? 0 : 0.5), y: 0.5 });
+    }
+
+    function merge() {
+      player.matrix.forEach((row, y) => {
+        row.forEach((v, x) => {
+          if (v !== 0) arena[y + player.pos.y][x + player.pos.x] = v;
+        });
+      });
+      sounds.land.play();
+    }
+
+    function playerRotate(dir) {
+      const m = player.matrix;
+      if (!m) return;
+      for (let y = 0; y < m.length; ++y) {
+        for (let x = 0; x < y; ++x) [m[x][y], m[y][x]] = [m[y][x], m[x][y]];
+      }
+      if (dir > 0) m.forEach(row => row.reverse()); else m.reverse();
+      const pos = player.pos.x; let offset = 1;
+      while (collide(arena, player)) {
+        player.pos.x += offset;
+        offset = -(offset + (offset > 0 ? 1 : -1));
+        if (offset > m[0].length) { playerRotate(-dir); player.pos.x = pos; return; }
+      }
+      sounds.rotate.play();
+    }
+
+    function openPanel(id) {
+      ['main-menu-panel', 'settings-panel', 'companion-panel'].forEach(p => {
+        document.getElementById(p).style.display = (p === id ? 'flex' : 'none');
+      });
+    }
+
+    function populateCompanions() {
+      const list = document.getElementById('companion-list');
+      list.innerHTML = '';
+      Object.keys(COMPANIONS).forEach(name => {
+        const item = document.createElement('div');
+        item.className = 'companion-item ' + (activeCompanion === name ? 'active' : '');
+        item.innerHTML = `<span>${name}${activeCompanion === name ? ' (Active)' : ''}</span>`;
+        item.onclick = () => {
+          activeCompanion = name;
+          document.getElementById('companion-gif').src = COMPANIONS[name].file;
+          populateCompanions();
+        };
+        list.appendChild(item);
+      });
+    }
+
+    function startGame() {
+      arena.forEach(row => row.fill(0)); bag = [];
+      player.score = 0; player.lines = 0; player.level = 1; player.holdPiece = null;
+      try { sounds.bgm.play(); } catch (e) { }
+      gameState = 'PLAYING'; document.getElementById('overlay').style.display = 'none';
+      pieceQueue = [getNextPiece(), getNextPiece()];
+      playerReset();
+    }
+
+    function handlePrimaryBtn() { (gameState === 'PAUSED' ? unpause() : startGame()); }
+    function unpause() { gameState = 'PLAYING'; sounds.bgm.play(); document.getElementById('overlay').style.display = 'none'; }
+    function updateVolume(val) {
+      const vol = val / 100;
+      Object.keys(sounds).forEach(k => sounds[k].volume = (k === 'bgm' ? vol * 0.6 : vol));
+    }
+
+    window.addEventListener('keydown', e => {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(e.key)) e.preventDefault();
+      if (e.key.toLowerCase() === 'p') {
+        if (gameState === 'PLAYING') {
+          gameState = 'PAUSED'; sounds.bgm.pause();
+          document.getElementById('overlay').style.display = 'flex';
+          document.getElementById('primary-btn').innerText = "RESUME";
+          document.getElementById('restart-btn').style.display = 'block';
+        } else if (gameState === 'PAUSED') unpause();
+      }
+      if (gameState !== 'PLAYING') return;
+      if (e.key in keys) keys[e.key].down = true;
+      if (e.key === 'ArrowUp') playerRotate(1);
+      if (e.key === ' ') {
+        while (!collide(arena, player)) player.pos.y++;
+        player.pos.y--; merge(); playerReset(); arenaSweep();
+      }
+      if (e.key.toLowerCase() === 'c' && player.canHold) {
+        let cur = player.matrix;
+        if (player.holdPiece) {
+          player.matrix = player.holdPiece; player.holdPiece = cur;
+          player.pos.y = 0; player.pos.x = (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
+        } else { player.holdPiece = cur; playerReset(); }
+        player.canHold = false;
+      }
+    });
+    window.addEventListener('keyup', e => { if (e.key in keys) keys[e.key].down = false; });
+
+    initColorPickers();
+    populateCompanions();
+    update();
+  </script>
+</body>
+
+</html>
