@@ -1,5 +1,4 @@
-/* Portfolio stylesheet using custom palette
-   Palette:
+/* Palette:
    deep:  #885053
    accent: #FE5F55
    indigo: #777DA7
@@ -20,7 +19,6 @@
     --radius: 12px;
 }
 
-/* Reset & base */
 *,
 :where(*::before, *::after) {
     box-sizing: border-box
