@@ -154,7 +154,7 @@ nav a.active::after {
     border-radius: 3px
 }
 
-/* subtle animations */
+/*animations */
 @keyframes floaty {
     0% {
         transform: translateY(0)
@@ -169,12 +169,7 @@ nav a.active::after {
     }
 }
 
-.project-card {
-    animation: floaty 6s ease-in-out infinite;
-    will-change: transform
-}
-
-/* fade-in utility */
+/* fade in utility*/
 .fade-in {
     opacity: 0;
     transform: translateY(6px);
