@@ -467,15 +467,26 @@ nav a.active::after {
     display: flex;
     gap: .5rem;
     flex-wrap: wrap;
-    margin-top: .8rem
 }
 
 .skill {
-    background: var(--color-indigo);
+    background: var(--color-mint);
     color: white;
-    padding: .35rem .6rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: .45rem .7rem;
     border-radius: 8px;
-    font-size: .82rem
+}
+
+.skill img {
+    width: 1.25em;
+    height: 1.25em;
+
+    display: block;
+    object-fit: contain;
 }
 
 /* Contact */
