@@ -125,13 +125,22 @@ document.addEventListener('keydown', (event) => {
         event.preventDefault();
         createAndMoveImage();
     }
-    // Backspace removes all birds (quick cleanup)
+
     if (event.code === 'Backspace') {
         birds.slice().forEach(removeBird);
     }
 });
 
-// cleanup animation frames on unload
 window.addEventListener('beforeunload', () => {
     animationFrames.forEach(id => cancelAnimationFrame(id));
 });
+
+  const inputField = document.getElementById('magicBox');
+
+  inputField.addEventListener('input', (e) => {
+    const value = e.target.value.toLowerCase();
+
+    if (value === 'lore') {
+      window.location.href = 'https://asa-db.github.io/lore.txt';
+    }
+  });
