@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Test</title>
+</head>
+
+<body>
+    <img src="/games/cookie.png" width=200 onclick="addScore()">
+    <div id="scoreBox">0</div>
+    <div id="multiplyButton"><button onclick="buyMulti()" id="multiplyBtn">Buy Upgrade</button></div>
+    <div id="autoButton"><button onclick="buyAutoClick()" id="autoBtn">Buy Autoclick</button></div>
+</body>
+<script>
+    let name = prompt("What is your name?");
+    name = name.toLowerCase()
+    if (name == "vadim") {
+        document.write("Stupid name.");
+    } else {
+        document.write("Hello, " + name + "!");
+    }
+
+    var score = 0;
+    var multiplier = 1.0;
+    var autoClickAmount = 0;
+    var scoreBox = document.getElementById("scoreBox");
+    var autoButton = document.getElementById("autoButton")
+    var multiplyButton = document.getElementById("multiplyBtn");
+    var autoButton = document.getElementById("autoBtn");
+
+    function updatePrices() {
+        multiplyButton.innerHTML = "Buy Upgrade (" + (multiplier * 10) + ")";
+        autoButton.innerHTML = "Buy Autoclick (" + (autoClickAmount === 0 ? 1 : autoClickAmount * 10) + ")";
+    }
+
+    function addScore() {
+        score = score + multiplier;
+        scoreBox.innerHTML = score;
+    }
+
+    function buyMulti() {
+        if (score >= (multiplier * 10)) {
+            score = score - (multiplier * 10)
+            multiplier = multiplier + 0.5;
+            scoreBox.innerHTML = score;
+            updatePrices();
+        }
+    }
+
+    function buyAutoClick() {
+        if (autoClickAmount == 0) {
+            autoClickAmount = 1;
+            setInterval(
+                () => {
+                    score = score + autoClickAmount
+                    scoreBox.innerHTML = score;
+                },
+                1000
+            )
+            updatePrices();
+        } else if (score >= (autoClickAmount * 10)) {
+                score = score - (autoClickAmount * 10)
+            autoClickAmount = autoClickAmount + 1;
+            scoreBox.innerHTML = score;
+            updatePrices();
+            }
+    }
+
+    updatePrices();
+</script>
+
+</html>
