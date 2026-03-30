@@ -1,0 +1,149 @@
+body {
+    font-family: Comic Sans MS, Trebuchet MS, Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* TOP BANNER */
+.top_banner {
+    background: linear-gradient(to right, #ff00ff, #00ffff, #ffff00, #ff00ff);
+    padding: 15px;
+    text-align: center;
+}
+
+.top_banner img {
+    max-width: 600px;
+    width: 100%;
+    border: 2px solid #000;
+    margin-bottom: 5px;
+}
+
+.top_banner h1 {
+    font-size: 32px;
+    color: #ff00ff;
+    text-shadow: 3px 3px #00ffff, 6px 6px #ffff00;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+/* SPACE AREA */
+.space_bg {
+    background-image: url('assets/bgDark.png');
+    background-repeat: repeat;
+    background-size: auto;
+    padding: 40px 10px;
+    min-height: 500px;
+}
+
+.space_bg h2 {
+    font-size: 28px;
+    color: #00ffff;
+    text-shadow: 0 0 10px #ff00ff;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.space_bg p {
+    font-size: 14px;
+    color: #ffff00;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+.inside {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.space_bg table {
+    font-size: 13px;
+}
+
+.space_bg font {
+    font-size: 16px;
+}
+
+/* GRASS AREA */
+.grass_bg {
+    background-image: url('assets/bgGrass.png');
+    background-repeat: repeat;
+    background-size: auto;
+    padding: 30px 0;
+    min-height: 600px;
+}
+
+.grass_bg h2 {
+    font-size: 36px;
+    color: #228b22;
+    text-shadow: 2px 2px #ff00ff;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.grass_bg p {
+    font-size: 16px;
+    color: #000;
+    margin: 10px 0;
+}
+
+.grass_bg table {
+    font-size: 14px;
+    color: #000;
+}
+
+.grass_bg td {
+    font-family: Arial, sans-serif;
+}
+
+/* OCEAN AREA */
+.water_bg {
+    background-image: url('assets/bgSea.png');
+    background-repeat: repeat;
+    background-size: auto;
+    padding: 40px 10px;
+    margin-top: 20px;
+    min-height: 600px;
+}
+
+.water_bg h2 {
+    font-size: 32px;
+    color: #00bfff;
+    text-shadow: 2px 2px #ff1493, 0 0 10px #00ffff;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.water_bg p {
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.4;
+    margin: 10px 0;
+}
+
+.oceanlink {
+    background-color: #ff00ff;
+    color: #fff;
+    padding: 8px 15px;
+    text-decoration: none;
+    border: 2px solid #00ffff;
+    font-weight: bold;
+    font-size: 12px;
+    margin: 0 3px;
+}
+
+.oceanlink:hover {
+    background-color: #00ffff;
+    color: #000;
+}
+
+/* BLINKING TEXT */
+.blink_text {
+    animation: blinkit 1s infinite;
+}
+
+@keyframes blinkit {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
