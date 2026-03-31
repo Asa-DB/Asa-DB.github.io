@@ -14,6 +14,7 @@ body {
     letter-spacing: 1px;
     padding: 10px 0;
     text-transform: uppercase;
+    overflow: hidden;
 }
 
 .marquee_top {
@@ -28,6 +29,7 @@ body {
     padding: 10px 0;
     font-weight: bold;
     box-shadow: 0 0 14px rgba(255, 255, 255, 0.2);
+    overflow: hidden;
 }
 
 .marquee_shell span {
@@ -46,6 +48,53 @@ body {
     width: 100%;
     border: 2px solid #000;
     margin-bottom: 5px;
+}
+
+/* Marquee replacements */
+.marquee-shell > div {
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1.5;
+}
+
+.marquee-content-left {
+    animation: scroll-left 15s linear infinite;
+    transform: translateX(100%);
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.marquee-content-alt {
+    animation: alternate-scroll 10s ease-in-out infinite alternate;
+    transform: translateX(0);
+}
+
+@keyframes alternate-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+.marquee-content-right {
+    animation: scroll-right 12s linear infinite;
+    transform: translateX(-100%);
+}
+
+@keyframes scroll-right {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.marquee-content-water {
+    animation: water-scroll 8s linear infinite alternate;
+    transform: translateX(-100%);
+}
+
+@keyframes water-scroll {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
 
 .top_banner h1 {
