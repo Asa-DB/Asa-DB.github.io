@@ -51,6 +51,7 @@ body {
 }
 
 /* Marquee replacements */
+.marquee_shell > div,
 .marquee-shell > div {
     display: inline-block;
     white-space: nowrap;
@@ -146,6 +147,29 @@ body {
     border-color: #00ffff;
 }
 
+.space_panel {
+    background: rgba(5, 5, 45, 0.9);
+    border: 3px ridge #00ffff;
+    box-shadow: 0 0 18px rgba(0, 255, 255, 0.22);
+    padding: 18px;
+}
+
+.retro_button {
+    display: inline-block;
+    background: #ffff00;
+    color: #000;
+    border: 2px outset #fff799;
+    padding: 8px 14px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 6px 8px 6px 0;
+    font-size: 13px;
+}
+
+.retro_button:hover {
+    background: #00ffff;
+}
+
 /* GRASS AREA */
 .grass_bg {
     background-image: url('assets/bgGrass.png');
@@ -189,7 +213,6 @@ body {
     background-repeat: repeat;
     background-size: auto;
     padding: 40px 10px;
-    margin-top: 20px;
     min-height: 600px;
 }
 
@@ -229,6 +252,213 @@ body {
     border-color: #00ffff;
 }
 
+/* PHILOSOPHY BLOG */
+.philosophy_bg {
+    background-image: url('assets/bubbles.png');
+    background-repeat: repeat;
+    background-size: auto;
+    padding: 36px 10px 48px;
+    min-height: 100vh;
+}
+
+.philosophy_wrap {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.philosophy_header {
+    background: linear-gradient(180deg, rgba(0, 255, 255, 0.18), rgba(255, 0, 255, 0.16));
+    border: 3px ridge #ffffff;
+    padding: 22px;
+    text-align: center;
+}
+
+.philosophy_header h1 {
+    color: #ffff00;
+    font-size: 38px;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.philosophy_header p {
+    color: #00ffff;
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+.link_row {
+    margin-top: 18px;
+}
+
+.fake_marquee {
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+}
+
+.fake_marquee_track {
+    display: inline-block;
+    min-width: 200%;
+    padding-left: 100%;
+    animation: ticker_scroll 18s linear infinite;
+}
+
+.fake_marquee_track span {
+    display: inline-block;
+    margin-right: 36px;
+}
+
+.blog_grid {
+    display: grid;
+    grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.blog_sidebar {
+    background: rgba(35, 0, 60, 0.88);
+    border: 3px ridge #ff66cc;
+    color: #fff799;
+    padding: 16px;
+}
+
+.blog_sidebar h2 {
+    color: #ff99ff;
+    font-size: 22px;
+    margin: 0 0 14px;
+}
+
+.blog_sidebar p,
+.blog_sidebar li {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.blog_sidebar ul {
+    padding-left: 18px;
+    margin: 10px 0 0;
+}
+
+.post_list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.post_dropdown {
+    background: rgba(255, 248, 220, 0.96);
+    border: 4px ridge #ffff00;
+}
+
+.post_dropdown summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 20px;
+    background: #fff7aa;
+}
+
+.post_dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+.post_heading_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+}
+
+.post_heading_row h2 {
+    color: #1b2fd1;
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.post_toggle {
+    flex-shrink: 0;
+    background: #24003f;
+    color: #fff799;
+    border: 2px outset #00ffff;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.post_dropdown[open] .post_toggle::before {
+    content: "CLOSE";
+}
+
+.post_dropdown:not([open]) .post_toggle::before {
+    content: "OPEN";
+}
+
+.post_shell {
+    background: #fff8dc;
+    color: #1a1030;
+    padding: 22px;
+}
+
+.post_meta {
+    background: #dffbff;
+    border: 2px dashed #1b2fd1;
+    color: #0d3b66;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px 12px;
+    margin: 0 0 18px;
+}
+
+.post_shell p {
+    color: #21153d;
+    font-size: 17px;
+    line-height: 1.68;
+    margin: 0 0 16px;
+}
+
+.post_note {
+    background: #24003f;
+    border: 2px solid #00ffff;
+    color: #fff799;
+    padding: 14px;
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+.stamp_row {
+    text-align: center;
+    margin-top: 22px;
+}
+
+.stamp_row img {
+    margin: 0 10px;
+    vertical-align: middle;
+}
+
+@media (max-width: 760px) {
+    .blog_grid {
+        grid-template-columns: 1fr;
+    }
+
+    .philosophy_header h1 {
+        font-size: 30px;
+    }
+
+    .post_heading_row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .post_heading_row h2 {
+        font-size: 26px;
+    }
+
+    .post_shell p {
+        font-size: 16px;
+    }
+}
+
 /* BLINKING TEXT */
 .blink_text {
     animation: blinkit 1s infinite;
@@ -237,4 +467,9 @@ body {
 @keyframes blinkit {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
+}
+
+@keyframes ticker_scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }
