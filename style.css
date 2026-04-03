@@ -252,31 +252,28 @@ body {
     border-color: #00ffff;
 }
 
-.android_notice_backdrop {
+.site_float_panel {
     position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    background: rgba(0, 0, 0, 0.74);
-    z-index: 99999;
+    left: 50%;
+    top: 50%;
+    width: min(540px, calc(100vw - 32px));
+    transform: translate(-50%, -50%);
+    z-index: 50;
 }
 
-.android_notice {
+.site_float_panel_inner {
     position: relative;
-    width: min(540px, calc(100vw - 32px));
     background: linear-gradient(180deg, rgba(10, 10, 10, 0.98), rgba(0, 66, 20, 0.98));
     border: 3px ridge #72ff72;
     box-shadow: 0 0 28px rgba(114, 255, 114, 0.52);
-    padding: 24px 24px 22px;
+    padding: 28px 28px 24px;
     text-align: center;
     animation: android_notice_pop 220ms ease-out;
 }
 
-.android_notice_logo {
+.site_float_panel_logo {
     display: block;
-    width: 88px;
+    width: 96px;
     max-width: 28%;
     margin: 0 auto 10px;
     image-rendering: auto;
@@ -293,7 +290,7 @@ body {
     }
 }
 
-.android_notice h2 {
+.site_float_panel h2 {
     margin: 0 0 10px;
     color: #72ff72;
     font-size: 42px;
@@ -301,28 +298,28 @@ body {
     text-shadow: 2px 2px 0 #000;
 }
 
-.android_notice_kicker,
-.android_notice_text {
+.site_float_panel_kicker,
+.site_float_panel_text {
     margin: 0 0 8px;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 15px;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
 
-.android_notice_timer {
+.site_float_panel_timer {
     margin: 0 0 14px;
     color: #ffff00;
-    font-size: 30px;
+    font-size: 32px;
     font-weight: bold;
     text-shadow: 1px 1px 0 #000;
 }
 
-.android_notice_link {
+.site_float_panel_link {
     margin: 0;
 }
 
-.android_notice_close {
+.site_float_panel_close {
     position: absolute;
     top: 8px;
     right: 8px;
@@ -336,25 +333,25 @@ body {
     cursor: pointer;
 }
 
-.android_notice_close:hover {
+.site_float_panel_close:hover {
     background: #ffff00;
     color: #000;
 }
 
 @media (max-width: 640px) {
-    .android_notice_backdrop {
-        padding: 12px;
+    .site_float_panel {
+        width: calc(100vw - 24px);
     }
 
-    .android_notice {
+    .site_float_panel_inner {
         padding: 20px 18px 18px;
     }
 
-    .android_notice h2 {
+    .site_float_panel h2 {
         font-size: 32px;
     }
 
-    .android_notice_timer {
+    .site_float_panel_timer {
         font-size: 24px;
     }
 }

@@ -100,7 +100,7 @@
 
     <!-- OCEAN STUFF -->
     <div class="water_bg">
-        <div style="padding: 30px; max-width: 900px; margin: 0 auto;">
+        <div style="padding max-width: 900px; margin: 0 auto;">
             <img src="assets/dolphin2.gif" style="float:left; margin: 5px;">
             <img src="assets/shark.gif" style="float:right; margin: 5px;">
             <br clear="left">
@@ -147,31 +147,30 @@
         </div>
     </div>
 
-    <div class="android_notice_backdrop" id="android-notice-backdrop">
-        <div class="android_notice" id="android-notice" role="dialog" aria-live="polite" aria-label="Save Android notice">
-            <button class="android_notice_close" id="android-notice-close" type="button" aria-label="Close Save Android notice">X</button>
-            <img class="android_notice_logo" src="assets/android.png" alt="Android logo">
-            <p class="android_notice_kicker">KEEP ANDROID OPEN</p>
+    <aside class="site_float_panel site_float_panel_android" id="site-float-panel" aria-label="Keep Android Open panel">
+        <div class="site_float_panel_inner">
+            <button class="site_float_panel_close" id="site-float-panel-close" type="button" aria-label="Close Keep Android Open panel">X</button>
+            <img class="site_float_panel_logo" src="assets/android.png" alt="Android logo">
+            <p class="site_float_panel_kicker">KEEP ANDROID OPEN</p>
             <h2>SAVE ANDROID</h2>
-            <p class="android_notice_text">
+            <p class="site_float_panel_text">
                 countdown to when google ruins android:
             </p>
-            <p class="android_notice_timer" id="android-countdown">loading...</p>
-            <a class="retro_button android_notice_link" href="https://keepandroidopen.org/" target="_blank" rel="noopener noreferrer">
+            <p class="site_float_panel_timer" id="android-countdown">loading...</p>
+            <a class="retro_button site_float_panel_link" href="https://keepandroidopen.org/" target="_blank" rel="noopener noreferrer">
                 READ MORE
             </a>
         </div>
-    </div>
+    </aside>
 
     <script>
         (function () {
-            var backdrop = document.getElementById('android-notice-backdrop');
-            var notice = document.getElementById('android-notice');
-            var closeButton = document.getElementById('android-notice-close');
+            var panel = document.getElementById('site-float-panel');
+            var closeButton = document.getElementById('site-float-panel-close');
             var countdown = document.getElementById('android-countdown');
             var targetDate = new Date('2026-09-01T00:00:00');
 
-            if (!backdrop || !notice || !closeButton || !countdown) {
+            if (!panel || !closeButton || !countdown) {
                 return;
             }
 
@@ -201,7 +200,7 @@
             }
 
             closeButton.addEventListener('click', function () {
-                backdrop.style.display = 'none';
+                panel.style.display = 'none';
             });
 
             updateCountdown();
