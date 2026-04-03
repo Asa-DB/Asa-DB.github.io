@@ -147,6 +147,68 @@
         </div>
     </div>
 
+    <div class="android_notice_backdrop" id="android-notice-backdrop">
+        <div class="android_notice" id="android-notice" role="dialog" aria-live="polite" aria-label="Save Android notice">
+            <button class="android_notice_close" id="android-notice-close" type="button" aria-label="Close Save Android notice">X</button>
+            <img class="android_notice_logo" src="assets/android.png" alt="Android logo">
+            <p class="android_notice_kicker">KEEP ANDROID OPEN</p>
+            <h2>SAVE ANDROID</h2>
+            <p class="android_notice_text">
+                countdown to when google ruins android:
+            </p>
+            <p class="android_notice_timer" id="android-countdown">loading...</p>
+            <a class="retro_button android_notice_link" href="https://keepandroidopen.org/" target="_blank" rel="noopener noreferrer">
+                READ MORE
+            </a>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var backdrop = document.getElementById('android-notice-backdrop');
+            var notice = document.getElementById('android-notice');
+            var closeButton = document.getElementById('android-notice-close');
+            var countdown = document.getElementById('android-countdown');
+            var targetDate = new Date('2026-09-01T00:00:00');
+
+            if (!backdrop || !notice || !closeButton || !countdown) {
+                return;
+            }
+
+            function updateCountdown() {
+                var now = new Date();
+                var diff = targetDate.getTime() - now.getTime();
+
+                if (diff <= 0) {
+                    countdown.textContent = 'the deadline is here';
+                    return;
+                }
+
+                var second = 1000;
+                var minute = second * 60;
+                var hour = minute * 60;
+                var day = hour * 24;
+
+                var days = Math.floor(diff / day);
+                diff -= days * day;
+                var hours = Math.floor(diff / hour);
+                diff -= hours * hour;
+                var minutes = Math.floor(diff / minute);
+                diff -= minutes * minute;
+                var seconds = Math.floor(diff / second);
+
+                countdown.textContent = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+            }
+
+            closeButton.addEventListener('click', function () {
+                backdrop.style.display = 'none';
+            });
+
+            updateCountdown();
+            window.setInterval(updateCountdown, 1000);
+        }());
+    </script>
+
 </body>
 
 </html>

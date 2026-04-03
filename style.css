@@ -252,6 +252,113 @@ body {
     border-color: #00ffff;
 }
 
+.android_notice_backdrop {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.74);
+    z-index: 99999;
+}
+
+.android_notice {
+    position: relative;
+    width: min(540px, calc(100vw - 32px));
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.98), rgba(0, 66, 20, 0.98));
+    border: 3px ridge #72ff72;
+    box-shadow: 0 0 28px rgba(114, 255, 114, 0.52);
+    padding: 24px 24px 22px;
+    text-align: center;
+    animation: android_notice_pop 220ms ease-out;
+}
+
+.android_notice_logo {
+    display: block;
+    width: 88px;
+    max-width: 28%;
+    margin: 0 auto 10px;
+    image-rendering: auto;
+}
+
+@keyframes android_notice_pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.android_notice h2 {
+    margin: 0 0 10px;
+    color: #72ff72;
+    font-size: 42px;
+    line-height: 1;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.android_notice_kicker,
+.android_notice_text {
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.android_notice_timer {
+    margin: 0 0 14px;
+    color: #ffff00;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.android_notice_link {
+    margin: 0;
+}
+
+.android_notice_close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    border: 2px outset #fff;
+    background: #ff4d4d;
+    color: #fff;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.android_notice_close:hover {
+    background: #ffff00;
+    color: #000;
+}
+
+@media (max-width: 640px) {
+    .android_notice_backdrop {
+        padding: 12px;
+    }
+
+    .android_notice {
+        padding: 20px 18px 18px;
+    }
+
+    .android_notice h2 {
+        font-size: 32px;
+    }
+
+    .android_notice_timer {
+        font-size: 24px;
+    }
+}
+
 /* PHILOSOPHY BLOG */
 .philosophy_bg {
     background-image: url('assets/bubbles.png');
