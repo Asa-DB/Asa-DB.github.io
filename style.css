@@ -261,11 +261,15 @@ body {
     z-index: 50;
 }
 
+.site_float_panel[hidden] {
+    display: none;
+}
+
 .site_float_panel_inner {
     position: relative;
-    background: linear-gradient(180deg, rgba(10, 10, 10, 0.98), rgba(0, 66, 20, 0.98));
-    border: 3px ridge #72ff72;
-    box-shadow: 0 0 28px rgba(114, 255, 114, 0.52);
+    background: var(--panel-bg, linear-gradient(180deg, rgba(10, 10, 10, 0.98), rgba(0, 66, 20, 0.98)));
+    border: 3px ridge var(--panel-accent, #72ff72);
+    box-shadow: 0 0 28px var(--panel-glow, rgba(114, 255, 114, 0.52));
     padding: 28px 28px 24px;
     text-align: center;
     animation: android_notice_pop 220ms ease-out;
@@ -292,7 +296,7 @@ body {
 
 .site_float_panel h2 {
     margin: 0 0 10px;
-    color: #72ff72;
+    color: var(--panel-accent, #72ff72);
     font-size: 42px;
     line-height: 1;
     text-shadow: 2px 2px 0 #000;
@@ -309,14 +313,54 @@ body {
 
 .site_float_panel_timer {
     margin: 0 0 14px;
-    color: #ffff00;
+    color: var(--panel-highlight, #ffff00);
     font-size: 32px;
     font-weight: bold;
     text-shadow: 1px 1px 0 #000;
 }
 
+.site_float_panel_meta {
+    margin: 0 0 16px;
+    color: var(--panel-highlight, #ffff00);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.site_float_panel_spotlight {
+    --panel-bg: linear-gradient(180deg, rgba(34, 8, 67, 0.98), rgba(0, 89, 101, 0.98));
+    --panel-accent: #ffff66;
+    --panel-glow: rgba(0, 255, 255, 0.4);
+    --panel-highlight: #7df9ff;
+}
+
+.site_float_panel_projects {
+    --panel-bg: linear-gradient(180deg, rgba(71, 8, 33, 0.98), rgba(133, 55, 0, 0.98));
+    --panel-accent: #ff9de2;
+    --panel-glow: rgba(255, 157, 226, 0.45);
+    --panel-highlight: #fff799;
+}
+
+.site_float_panel_contact {
+    --panel-bg: linear-gradient(180deg, rgba(10, 44, 86, 0.98), rgba(15, 115, 117, 0.98));
+    --panel-accent: #9dffea;
+    --panel-glow: rgba(157, 255, 234, 0.42);
+    --panel-highlight: #ffff99;
+}
+
 .site_float_panel_link {
     margin: 0;
+}
+
+.site_float_panel_secondary {
+    background: #ff66cc;
+    border-color: #ffd2f1;
+    margin-left: 8px;
+}
+
+.site_float_panel_secondary:hover {
+    background: #7df9ff;
 }
 
 .site_float_panel_close {

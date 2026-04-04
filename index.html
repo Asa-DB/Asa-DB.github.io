@@ -106,7 +106,7 @@
             <br clear="left">
             <img src="assets/submarine.png" style="display: block; margin: 20px auto;">
 
-            <h2 style="color: #00bfff; text-align: center;">CONTACT ME!!!!</h2>
+            <h2 id="contact-zone" style="color: #00bfff; text-align: center;">CONTACT ME!!!!</h2>
             <p style="text-align: center; color: #fff; font-size: 18px;">
                 wanna talk? send me an email or find me around the web :D
             </p>
@@ -147,19 +147,18 @@
         </div>
     </div>
 
-    <aside class="site_float_panel site_float_panel_android" id="site-float-panel" aria-label="Keep Android Open panel">
+    <aside class="site_float_panel site_float_panel_spotlight" id="site-float-panel" aria-label="Site spotlight panel" hidden>
         <div class="site_float_panel_inner">
-            <button class="site_float_panel_close" id="site-float-panel-close" type="button" aria-label="Close Keep Android Open panel">X</button>
-            <img class="site_float_panel_logo" src="assets/android.png" alt="Android logo">
-            <p class="site_float_panel_kicker">KEEP ANDROID OPEN</p>
-            <h2>SAVE ANDROID</h2>
-            <p class="site_float_panel_text">
-                countdown to when google ruins android:
-            </p>
-            <p class="site_float_panel_timer" id="android-countdown">loading...</p>
-            <a class="retro_button site_float_panel_link" href="https://keepandroidopen.org/" target="_blank" rel="noopener noreferrer">
-                READ MORE
+            <button class="site_float_panel_close" id="site-float-panel-close" type="button" aria-label="Close site spotlight panel">X</button>
+            <img class="site_float_panel_logo" id="site-float-panel-logo" src="" alt="">
+            <p class="site_float_panel_kicker" id="site-float-panel-kicker"></p>
+            <h2 id="site-float-panel-title"></h2>
+            <p class="site_float_panel_text" id="site-float-panel-text"></p>
+            <p class="site_float_panel_meta" id="site-float-panel-meta"></p>
+            <a class="retro_button site_float_panel_link" id="site-float-panel-link" href="#" target="_blank" rel="noopener noreferrer">
+                CHECK IT OUT
             </a>
+            <button class="retro_button site_float_panel_secondary" id="site-float-panel-next" type="button">NEXT THING</button>
         </div>
     </aside>
 
@@ -167,44 +166,96 @@
         (function () {
             var panel = document.getElementById('site-float-panel');
             var closeButton = document.getElementById('site-float-panel-close');
-            var countdown = document.getElementById('android-countdown');
-            var targetDate = new Date('2026-09-01T00:00:00');
+            var nextButton = document.getElementById('site-float-panel-next');
+            var logo = document.getElementById('site-float-panel-logo');
+            var kicker = document.getElementById('site-float-panel-kicker');
+            var title = document.getElementById('site-float-panel-title');
+            var text = document.getElementById('site-float-panel-text');
+            var meta = document.getElementById('site-float-panel-meta');
+            var link = document.getElementById('site-float-panel-link');
+            var spotlightIndex = 0;
+            var spotlights = [
+                {
+                    label: 'Thought Zone panel',
+                    kicker: 'SITE SPOTLIGHT',
+                    title: 'THOUGHT ZONE',
+                    text: 'i made a blog for philosophy, coding thoughts, and whatever else is bouncing around in my head.',
+                    meta: 'internal jump',
+                    link: 'blog.html',
+                    linkLabel: 'ENTER THOUGHT ZONE',
+                    themeClass: 'site_float_panel_spotlight'
+                },
+                {
+                    label: 'Betapalettes panel',
+                    kicker: 'FEATURED PROJECT',
+                    title: 'BETAPALETTES',
+                    text: 'minecraft beta builders deserve better tools. this one has palettes, planning, and weird builder energy.',
+                    meta: 'external portal',
+                    link: 'https://Asa-DB.github.io/betapalettes/',
+                    linkLabel: 'OPEN PROJECT',
+                    themeClass: 'site_float_panel_projects'
+                },
+                {
+                    label: 'Discord RPC panel',
+                    kicker: 'PYTHON THING',
+                    title: 'DISCORD RPC',
+                    text: 'custom rich presence for basically anything. a good project if you like automation and pointless style.',
+                    meta: 'github launch',
+                    link: 'https://github.com/Asa-DB/Universal-Custom-Discord-RPC',
+                    linkLabel: 'SEE THE REPO',
+                    themeClass: 'site_float_panel_projects'
+                },
+                {
+                    label: 'Contact panel',
+                    kicker: 'WANT TO TALK?',
+                    title: 'SEND A MESSAGE',
+                    text: 'email me, find me on github, or show up on discord if you have something interesting to say.',
+                    meta: 'human interaction',
+                    link: '#contact-zone',
+                    linkLabel: 'JUMP TO CONTACT',
+                    themeClass: 'site_float_panel_contact'
+                }
+            ];
 
-            if (!panel || !closeButton || !countdown) {
+            if (!panel || !closeButton || !nextButton || !logo || !kicker || !title || !text || !meta || !link) {
                 return;
             }
 
-            function updateCountdown() {
-                var now = new Date();
-                var diff = targetDate.getTime() - now.getTime();
+            function applySpotlight(index) {
+                var item = spotlights[index];
+                panel.hidden = false;
+                panel.className = 'site_float_panel ' + item.themeClass;
+                panel.setAttribute('aria-label', item.label);
+                logo.hidden = true;
+                logo.removeAttribute('src');
+                logo.alt = '';
+                kicker.textContent = item.kicker;
+                title.textContent = item.title;
+                text.textContent = item.text;
+                meta.textContent = item.meta;
+                link.href = item.link;
+                link.textContent = item.linkLabel;
 
-                if (diff <= 0) {
-                    countdown.textContent = 'the deadline is here';
-                    return;
+                if (item.link.indexOf('http') === 0) {
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                } else {
+                    link.target = '_self';
+                    link.rel = '';
                 }
-
-                var second = 1000;
-                var minute = second * 60;
-                var hour = minute * 60;
-                var day = hour * 24;
-
-                var days = Math.floor(diff / day);
-                diff -= days * day;
-                var hours = Math.floor(diff / hour);
-                diff -= hours * hour;
-                var minutes = Math.floor(diff / minute);
-                diff -= minutes * minute;
-                var seconds = Math.floor(diff / second);
-
-                countdown.textContent = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
             }
 
             closeButton.addEventListener('click', function () {
-                panel.style.display = 'none';
+                panel.hidden = true;
             });
 
-            updateCountdown();
-            window.setInterval(updateCountdown, 1000);
+            nextButton.addEventListener('click', function () {
+                spotlightIndex = (spotlightIndex + 1) % spotlights.length;
+                applySpotlight(spotlightIndex);
+            });
+
+            spotlightIndex = Math.floor(Math.random() * spotlights.length);
+            applySpotlight(spotlightIndex);
         }());
     </script>
 
