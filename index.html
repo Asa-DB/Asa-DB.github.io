@@ -150,10 +150,11 @@
     <aside class="site_float_panel site_float_panel_spotlight" id="site-float-panel" aria-label="Site spotlight panel" hidden>
         <div class="site_float_panel_inner">
             <button class="site_float_panel_close" id="site-float-panel-close" type="button" aria-label="Close site spotlight panel">X</button>
-            <img class="site_float_panel_logo" id="site-float-panel-logo" src="" alt="">
+            <img class="site_float_panel_logo" id="site-float-panel-logo" alt="" hidden>
             <p class="site_float_panel_kicker" id="site-float-panel-kicker"></p>
             <h2 id="site-float-panel-title"></h2>
             <p class="site_float_panel_text" id="site-float-panel-text"></p>
+            <p class="site_float_panel_timer" id="site-float-panel-timer" hidden></p>
             <p class="site_float_panel_meta" id="site-float-panel-meta"></p>
             <a class="retro_button site_float_panel_link" id="site-float-panel-link" href="#" target="_blank" rel="noopener noreferrer">
                 CHECK IT OUT
@@ -171,9 +172,11 @@
             var kicker = document.getElementById('site-float-panel-kicker');
             var title = document.getElementById('site-float-panel-title');
             var text = document.getElementById('site-float-panel-text');
+            var timer = document.getElementById('site-float-panel-timer');
             var meta = document.getElementById('site-float-panel-meta');
             var link = document.getElementById('site-float-panel-link');
             var spotlightIndex = 0;
+            var countdownIntervalId = null;
             var spotlights = [
                 {
                     label: 'Thought Zone panel',
@@ -206,6 +209,19 @@
                     themeClass: 'site_float_panel_projects'
                 },
                 {
+                    label: 'Keep Android Open panel',
+                    kicker: 'NOTICE FOR ANDROID USERS',
+                    title: 'KEEP ANDROID OPEN',
+                    text: 'android should stay open, easy to access, and friendly to people who actually want control over their own device.',
+                    meta: 'countdown to september 1 2026',
+                    link: 'https://keepandroidopen.org/',
+                    linkLabel: 'VISIT THE SITE',
+                    themeClass: 'site_float_panel_android',
+                    logoSrc: 'assets/android.png',
+                    logoAlt: 'Android logo',
+                    countdownTarget: '2026-09-01T00:00:00-04:00'
+                },
+                {
                     label: 'Contact panel',
                     kicker: 'WANT TO TALK?',
                     title: 'SEND A MESSAGE',
@@ -217,8 +233,35 @@
                 }
             ];
 
-            if (!panel || !closeButton || !nextButton || !logo || !kicker || !title || !text || !meta || !link) {
+            if (!panel || !closeButton || !nextButton || !logo || !kicker || !title || !text || !timer || !meta || !link) {
                 return;
+            }
+
+            function formatCountdown(targetDate) {
+                var now = new Date();
+                var diff = targetDate.getTime() - now.getTime();
+
+                if (diff <= 0) {
+                    return 'THE COUNTDOWN HIT ZERO';
+                }
+
+                var totalSeconds = Math.floor(diff / 1000);
+                var days = Math.floor(totalSeconds / 86400);
+                var hours = Math.floor((totalSeconds % 86400) / 3600);
+                var minutes = Math.floor((totalSeconds % 3600) / 60);
+                var seconds = totalSeconds % 60;
+
+                return days + 'D ' + hours + 'H ' + minutes + 'M ' + seconds + 'S';
+            }
+
+            function clearCountdown() {
+                if (countdownIntervalId !== null) {
+                    window.clearInterval(countdownIntervalId);
+                    countdownIntervalId = null;
+                }
+
+                timer.hidden = true;
+                timer.textContent = '';
             }
 
             function applySpotlight(index) {
@@ -226,15 +269,33 @@
                 panel.hidden = false;
                 panel.className = 'site_float_panel ' + item.themeClass;
                 panel.setAttribute('aria-label', item.label);
-                logo.hidden = true;
-                logo.removeAttribute('src');
-                logo.alt = '';
+                clearCountdown();
+
+                if (item.logoSrc) {
+                    logo.hidden = false;
+                    logo.src = item.logoSrc;
+                    logo.alt = item.logoAlt || '';
+                } else {
+                    logo.hidden = true;
+                    logo.removeAttribute('src');
+                    logo.alt = '';
+                }
+
                 kicker.textContent = item.kicker;
                 title.textContent = item.title;
                 text.textContent = item.text;
                 meta.textContent = item.meta;
                 link.href = item.link;
                 link.textContent = item.linkLabel;
+
+                if (item.countdownTarget) {
+                    var targetDate = new Date(item.countdownTarget);
+                    timer.hidden = false;
+                    timer.textContent = formatCountdown(targetDate);
+                    countdownIntervalId = window.setInterval(function () {
+                        timer.textContent = formatCountdown(targetDate);
+                    }, 1000);
+                }
 
                 if (item.link.indexOf('http') === 0) {
                     link.target = '_blank';

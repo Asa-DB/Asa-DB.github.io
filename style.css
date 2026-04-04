@@ -349,6 +349,13 @@ body {
     --panel-highlight: #ffff99;
 }
 
+.site_float_panel_android {
+    --panel-bg: linear-gradient(180deg, rgba(7, 34, 8, 0.98), rgba(26, 89, 14, 0.98));
+    --panel-accent: #a4ff6f;
+    --panel-glow: rgba(164, 255, 111, 0.4);
+    --panel-highlight: #fff799;
+}
+
 .site_float_panel_link {
     margin: 0;
 }
