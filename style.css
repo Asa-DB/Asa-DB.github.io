@@ -283,6 +283,10 @@ body {
     image-rendering: auto;
 }
 
+.site_float_panel_logo[hidden] {
+    display: none;
+}
+
 @keyframes android_notice_pop {
     0% {
         opacity: 0;
