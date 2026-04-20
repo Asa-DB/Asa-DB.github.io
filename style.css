@@ -353,6 +353,13 @@ body {
     --panel-highlight: #ffff99;
 }
 
+.site_float_panel_services {
+    --panel-bg: linear-gradient(180deg, rgba(66, 0, 82, 0.98), rgba(119, 26, 74, 0.98));
+    --panel-accent: #ffff66;
+    --panel-glow: rgba(255, 102, 204, 0.42);
+    --panel-highlight: #ffb8f2;
+}
+
 .site_float_panel_android {
     --panel-bg: linear-gradient(180deg, rgba(7, 34, 8, 0.98), rgba(26, 89, 14, 0.98));
     --panel-accent: #a4ff6f;
@@ -631,4 +638,246 @@ body {
 @keyframes ticker_scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
+}
+
+.service_page {
+    background-color: #000;
+}
+
+.service_wrap {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.service_pad {
+    padding: 30px 12px;
+}
+
+.service_stamp {
+    display: block;
+    max-width: 340px;
+    width: 100%;
+    margin: 0 auto 20px;
+    border: 2px solid #ffffff;
+    background: #000;
+}
+
+.service_panel {
+    background: rgba(5, 5, 45, 0.9);
+    border: 3px ridge #ff66ff;
+    box-shadow: 0 0 18px rgba(255, 0, 255, 0.25);
+    padding: 20px;
+    text-align: center;
+}
+
+.service_panel h1 {
+    color: #ffff00;
+    font-size: 38px;
+    margin: 0 0 12px;
+    letter-spacing: 1px;
+}
+
+.service_panel p {
+    color: #00ffff;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.service_link_row {
+    margin-top: 18px;
+}
+
+.service_title_green,
+.service_title_blue {
+    font-size: 40px;
+    margin: 0 0 14px;
+    text-align: center;
+}
+
+.service_title_green {
+    color: #0e7a12;
+}
+
+.service_title_blue {
+    color: #00bfff;
+}
+
+.service_intro_text {
+    max-width: 760px;
+    margin: 0 auto 22px;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #111;
+    font-weight: bold;
+}
+
+.service_video_grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.service_video_card {
+    background: #fff7c2;
+    border: 4px ridge #ff1493;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.service_video_card video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    background: #000;
+    border: 2px solid #000;
+}
+
+.service_video_card h3 {
+    color: #ff1493;
+    font-size: 24px;
+    margin: 14px 0 10px;
+}
+
+.service_video_card p {
+    color: #111;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.service_badge_strip {
+    margin: 22px auto 0;
+    padding: 14px 10px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 3px ridge #ffffff;
+    text-align: center;
+}
+
+.service_badge_strip img {
+    margin: 4px 6px;
+    vertical-align: middle;
+}
+
+.service_offer_grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin: 20px 0 24px;
+}
+
+.service_offer_card {
+    border: 4px ridge #ffffff;
+    padding: 18px;
+    box-sizing: border-box;
+    min-height: 100%;
+}
+
+.service_offer_template {
+    background: rgba(0, 0, 80, 0.82);
+}
+
+.service_offer_custom {
+    background: rgba(60, 0, 80, 0.84);
+}
+
+.service_offer_card h3 {
+    margin: 0 0 10px;
+    font-size: 28px;
+    color: #ffff00;
+}
+
+.service_offer_card p {
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.service_price {
+    font-size: 34px;
+    font-weight: bold;
+    color: #00ffff;
+    margin: 0 0 10px;
+}
+
+.service_table {
+    width: 100%;
+    background: rgba(0, 30, 80, 0.88);
+    color: #ffffff;
+    border-collapse: separate;
+}
+
+.service_table th {
+    background: #00bfff;
+    color: #001122;
+    font-size: 16px;
+}
+
+.service_table td {
+    background: rgba(0, 0, 0, 0.28);
+    font-size: 15px;
+}
+
+.service_contact_shell {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.service_contact_shell h2 {
+    color: #ffff00;
+    font-size: 36px;
+    margin: 0 0 10px;
+}
+
+.service_contact_shell p {
+    color: #ffffff;
+    font-size: 17px;
+}
+
+.service_contact_shell a {
+    color: #00ffff;
+}
+
+.service_submarine {
+    display: block;
+    margin: 0 auto 16px;
+    max-width: 240px;
+    width: 100%;
+}
+
+.service_float_left {
+    float: left;
+    margin: 6px 12px 6px 0;
+}
+
+.service_float_right {
+    float: right;
+    margin: 6px 0 6px 12px;
+}
+
+@media (max-width: 760px) {
+    .service_video_grid,
+    .service_offer_grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service_panel h1,
+    .service_title_green,
+    .service_title_blue,
+    .service_contact_shell h2 {
+        font-size: 30px;
+    }
+
+    .service_float_left,
+    .service_float_right {
+        float: none;
+        display: block;
+        margin: 0 auto 12px;
+    }
+
+    .service_table {
+        font-size: 14px;
+    }
 }
