@@ -1,12 +1,19 @@
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ASA DOT COM - THOUGHT ZONE</title>
+    <meta name="description"
+        content="Asa's Thought Zone: retro-styled blog posts on philosophy, technology, and personal reflections.">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="marquee_bar marquee_top fake_marquee">
+    <a class="skip_link" href="#main-content">Skip to main content</a>
+
+    <div class="marquee_bar marquee_top fake_marquee" aria-hidden="true">
         <div class="fake_marquee_track">
             <span>THE THOUGHT ZONE !!!</span>
             <span>IDEAS UNDER CONSTRUCTION !!!</span>
@@ -17,47 +24,49 @@
         </div>
     </div>
 
-    <div class="philosophy_bg">
+    <main id="main-content" class="philosophy_bg">
         <div class="philosophy_wrap">
-            <div class="philosophy_header">
-                <img src="assets/eye.gif" style="margin-right: 12px; vertical-align: middle;">
-                <img src="assets/randomGuyWeird.gif" style="margin-left: 12px; vertical-align: middle;">
+            <header class="philosophy_header">
+                <div class="blog_header_icons">
+                    <img src="assets/randomGuyWeird.gif" alt="Animated retro character">
+                </div>
                 <h1>Asa's THOUGHT ZONE</h1>
                 <p>--------------------------------------------------------------------------</p>
                 <p class="blink_text">ENTER THE THOUGHT ZONE</p>
 
-                <div class="link_row">
-                    <a class="retro_button" href="index.html">BACK TO HOME</a>
-                    <a class="retro_button" href="#post-list">JUMP TO POSTS</a>
-                </div>
-            </div>
+                <nav class="link_row" aria-label="Thought Zone navigation">
+                    <a class="retro_button" href="index.html">Back To Home</a>
+                    <a class="retro_button" href="#post-list">Jump To Posts</a>
+                </nav>
+            </header>
 
             <div class="blog_grid">
-                <div class="blog_sidebar">
-                    <h2>Thought Zone</h2>
-                    <p>
-                        A compact archive of my thoughts.
-                    </p>
+                <aside class="blog_sidebar" aria-labelledby="sidebar-title">
+                    <h2 id="sidebar-title">Thought Zone</h2>
+                    <p>A compact archive of my thoughts.</p>
+                    <ul>
+                        <li>philosophy notes</li>
+                        <li>technology thoughts</li>
+                        <li>personal reflections</li>
+                    </ul>
 
-                    <div class="marquee_shell" style="background: #ffffff; border-color: #ff99ff; color: #fff799;">
-                        <div
-                            style="text-align: center; line-height: 1.8; font-weight: bold; background-color: #ffffff;">
-                            <img src="assets/1.gif" alt="meow"
-                                style="display: block; margin-left: auto; margin-right: auto; width: 200px;">
+                    <div class="marquee_shell">
+                        <div class="sidebar_pixel_friend">
+                            <img src="assets/1.gif" alt="Pixel cat illustration">
                         </div>
                     </div>
-                </div>
+                </aside>
 
-                <div class="post_list" id="post-list">
+                <section class="post_list" id="post-list" aria-label="Blog posts">
                     <details class="post_dropdown">
                         <summary>
                             <div class="post_heading_row">
                                 <h2>Technology and Mental Health</h2>
-                                <span class="post_toggle"></span>
+                                <span class="post_toggle" aria-hidden="true"></span>
                             </div>
                         </summary>
 
-                        <div class="post_shell">
+                        <article class="post_shell">
                             <div class="post_meta">
                                 APRIL 10, 2026 | philosophy and technology
                             </div>
@@ -101,10 +110,9 @@
 
                             <p>
                                 In <i>The Gay Science</i>, Friedrich Nietzsche describes the collapse of shared
-                                metaphysical grounding in his (infamous) declaration that "God is dead."" This is not
-                                simply a
-                                statement about religion, but about the weakening of inherited structures that once
-                                provided meaning, interpretation, and direction. When those structures dissolve,
+                                metaphysical grounding in his (infamous) declaration that "God is dead." This is not
+                                simply a statement about religion, but about the weakening of inherited structures that
+                                once provided meaning, interpretation, and direction. When those structures dissolve,
                                 individuals are left with the task of generating meaning without a stable foundation.
                             </p>
 
@@ -142,16 +150,14 @@
                                 Supporting articles:
                                 <br>
                                 <a href="https://www.publichealth.columbia.edu/news/teens-social-media-use-does-not-raise-risk-depression-study"
-                                    target="_blank" rel="noopener noreferrer">Columbia Mailman School of Public Health:
-                                    Teens' social media use does not raise risk of depression, study</a>
+                                    target="_blank" rel="noopener noreferrer">Columbia Mailman School of Public
+                                    Health</a>
                                 <br>
                                 <a href="https://www.eurekalert.org/news-releases/999060" target="_blank"
-                                    rel="noopener noreferrer">EurekAlert: Digital technology use and adolescent
-                                    well-being, evidence remains mixed</a>
+                                    rel="noopener noreferrer">EurekAlert</a>
                                 <br>
                                 <a href="https://project-disco.org/innovation/the-internet-isnt-harmful-to-your-mental-health-oxford-study-finds/"
-                                    target="_blank" rel="noopener noreferrer">Project DisCo: The internet isn't harmful
-                                    to your mental health, Oxford study finds</a>
+                                    target="_blank" rel="noopener noreferrer">Project DisCo</a>
                             </div>
 
                             <p>
@@ -205,18 +211,18 @@
                                 And until that structural gap is addressed, technological restriction alone will remain
                                 insufficient, not because it is ineffective, but because it is incomplete.
                             </p>
-                        </div>
+                        </article>
                     </details>
 
                     <details class="post_dropdown">
                         <summary>
                             <div class="post_heading_row">
                                 <h2>I am a Chainsaw Man</h2>
-                                <span class="post_toggle"></span>
+                                <span class="post_toggle" aria-hidden="true"></span>
                             </div>
                         </summary>
 
-                        <div class="post_shell">
+                        <article class="post_shell">
                             <div class="post_meta">
                                 APRIL 5, 2026 | media and personal reflections
                             </div>
@@ -234,8 +240,7 @@
                             <p>
                                 For a long time, I carried a sense of shame that made it difficult to exist comfortably
                                 in the world. It felt as though there was no place for me, that there was no why I could
-                                be
-                                accepted without resistance. This did numbers to me, and even the small things felt
+                                be accepted without resistance. This did numbers to me, and even the small things felt
                                 heavy.
                             </p>
 
@@ -245,9 +250,8 @@
 
                             <p>
                                 There was nothing <i>traditionally</i> admirable about him. His goals were simple, even
-                                crude
-                                at times. He could be selfish, impulsive, and shortsighted. But he was real in a way
-                                that I had not seen before. He struggled, got discouraged, and yet he continued.
+                                crude at times. He could be selfish, impulsive, and shortsighted. But he was real in a
+                                way that I had not seen before. He struggled, got discouraged, and yet he continued.
                                 Not because he had some grandiose moral compass, but because he kept choosing to move
                                 forward, even in small ways.
                             </p>
@@ -257,9 +261,9 @@
                             </p>
 
                             <p>
-                                Seeing that changed me. For the first time, I felt that
-                                there might be a place for someone like me. Not an idealized version of myself, but the
-                                version that already existed.
+                                Seeing that changed me. For the first time, I felt that there might be a place for
+                                someone like me. Not an idealized version of myself, but the version that already
+                                existed.
                             </p>
 
                             <p>
@@ -280,8 +284,8 @@
 
                             <p>
                                 Instead, the ending felt abrupt. Not because of what it aimed for, but because of how
-                                much it left behind. There was more that could have been explored, more that could
-                                have been understood.
+                                much it left behind. There was more that could have been explored, more that could have
+                                been understood.
                             </p>
 
                             <p>
@@ -306,8 +310,7 @@
                             <p>
                                 The story did not need to be perfect to have meaning. It did not need to go on forever
                                 for it to have mattered. It served its role, and in doing so, it left something behind
-                                that
-                                did not disappear when it ended.
+                                that did not disappear when it ended.
                             </p>
 
                             <p>
@@ -327,18 +330,18 @@
                                 And in that sense, whatever I saw in Denji was never entirely separate from myself to
                                 begin with. It's time to be my own Chainsaw Man.
                             </p>
-                        </div>
+                        </article>
                     </details>
 
                     <details class="post_dropdown">
                         <summary>
                             <div class="post_heading_row">
                                 <h2>Life's Sculpture</h2>
-                                <span class="post_toggle"></span>
+                                <span class="post_toggle" aria-hidden="true"></span>
                             </div>
                         </summary>
 
-                        <div class="post_shell">
+                        <article class="post_shell">
                             <div class="post_meta">
                                 APRIL 5, 2026 | philosophy notes
                             </div>
@@ -367,17 +370,15 @@
                             <p>
                                 While feeling is not fully within one's control, response remains open. Between emotion
                                 and action there is a space. It is small and often missed, even by myself, but it
-                                exists. Within that
-                                space, a person can begin to shape themselves.
+                                exists. Within that space, a person can begin to shape themselves.
                             </p>
 
                             <p>
                                 To acknowledge a feeling without immediately obeying it takes a kind of discipline.
                                 It isn't a harsh or suppressive kind of discipline, but more akin to a stable self
-                                awareness. A person can feel anger and
-                                still choose restraint. They can feel unmotivated and still continue. They can feel
-                                uncertain and still move forward. This way, emotion is not rejected, but it is not
-                                given full authority either.
+                                awareness. A person can feel anger and still choose restraint. They can feel unmotivated
+                                and still continue. They can feel uncertain and still move forward. This way, emotion is
+                                not rejected, but it is not given full authority either.
                             </p>
 
                             <p>
@@ -392,38 +393,35 @@
 
                             <p>
                                 Each moment of recognition slowly sculpts something grander. You begin to notice a
-                                spiral before it
-                                deepens. Pausing instead of reacting. Choosing a better response, even when it feels
-                                unnatural. These moments do not create perfection. They create <i>resilience</i>. The
-                                ability to continue without needing everything to be ideal.
+                                spiral before it deepens. Pausing instead of reacting. Choosing a better response, even
+                                when it feels unnatural. These moments do not create perfection. They create
+                                <i>resilience</i>. The ability to continue without needing everything to be ideal.
                             </p>
 
                             <p>
-                                Life is not found fully formed, but shaped gradually, like a kind of
-                                sculpture. Each response leaves its own mark. Each decision refines or distorts what is
-                                being made. Life's Sculpture is not carved in a single moment, but through repeated
-                                acts of awareness and choice.
+                                Life is not found fully formed, but shaped gradually, like a kind of sculpture. Each
+                                response leaves its own mark. Each decision refines or distorts what is being made.
+                                Life's Sculpture is not carved in a single moment, but through repeated acts of
+                                awareness and choice.
                             </p>
 
                             <p>
                                 Happiness, then, does not work well as a direct goal. It is too dependent and too
-                                unstable when chased on its own. It appears more often as a result of something else.
-                                A life that feels directed, intentional, and in some sense chosen. (Although some people
+                                unstable when chased on its own. It appears more often as a result of something else. A
+                                life that feels directed, intentional, and in some sense chosen. (Although some people
                                 prefer to live with the flow, this too can be a form of direction. To accept life as it
-                                comes is still a choice, and in that sense, it remains part of a life that is chosen)
+                                comes is still a choice, and in that sense, it remains part of a life that is chosen.)
                             </p>
 
                             <p>
                                 This does not mean a person will always succeed. There will be times when awareness
-                                fails, when emotion takes over, when old patterns return without warning. These
-                                moments do not erase progress. They are part of the process of shaping Life's
-                                Sculpture.
+                                fails, when emotion takes over, when old patterns return without warning. These moments
+                                do not erase progress. They are part of the process of shaping Life's Sculpture.
                             </p>
 
                             <p>
                                 What matters isn't constant control, but gradual change. To recover a little faster.
-                                To see a little more clearly. To choose, even if only slightly, more often than
-                                before.
+                                To see a little more clearly. To choose, even if only slightly, more often than before.
                             </p>
 
                             <p>
@@ -434,18 +432,18 @@
                             <p>
                                 Over time, that influence is enough to shape the direction of a life.
                             </p>
-                        </div>
+                        </article>
                     </details>
 
                     <details class="post_dropdown">
                         <summary>
                             <div class="post_heading_row">
                                 <h2>The Discipline of Refusal</h2>
-                                <span class="post_toggle"></span>
+                                <span class="post_toggle" aria-hidden="true"></span>
                             </div>
                         </summary>
 
-                        <div class="post_shell">
+                        <article class="post_shell">
                             <div class="post_meta">
                                 APRIL 2, 2026 | philosophy notes
                             </div>
@@ -492,33 +490,45 @@
                             <p>
                                 Rejection is not a failure or a flaw, rather it is a form of self-preservation. Saying
                                 "no" protects your time, energy, and sense of self. Without it, even a well meaning
-                                relationship or opportunity can start to drain you, diluting your focus and values. </p>
+                                relationship or opportunity can start to drain you, diluting your focus and values.
+                            </p>
 
-                            <p> Every boundary you set is an act of self-clarity. To refuse what does not serve you is
+                            <p>
+                                Every boundary you set is an act of self-clarity. To refuse what does not serve you is
                                 not cruelty; it is the disciplined maintenance of what sustains you. Growth requires
                                 this selectivity, because not everything is meant to belong in your life.
                             </p>
-                            <p> Selectivity often provokes discomfort in others. Society prizes openness, agreeability,
+
+                            <p>
+                                Selectivity often provokes discomfort in others. Society prizes openness, agreeability,
                                 and accessibility, so when someone sets firm boundaries, it can be mistaken for
                                 arrogance or coldness. People rarely respect the discipline behind refusal; they choose
-                                to only see the distance it creates. </p>
-                            <p> This discomfort says more about them than it does about you. We admire authenticity in
+                                to only see the distance it creates.
+                            </p>
+
+                            <p>
+                                This discomfort says more about them than it does about you. We admire authenticity in
                                 theory, but resent it in practice when it excludes us. The wiser you become, the more
                                 you realize that resistance from others is an inevitable consequence of protecting what
-                                elevates you.</p>
-                            <p> Not everything deserves access to you, and not every refusal is a loss. <em>"He who has
-                                    a why to live can bear almost any how."</em> </p>
-                        </div>
-                    </details>
-                </div>
+                                elevates you.
+                            </p>
 
-                <div class="stamp_row">
-                    <img src="assets/jellyfish.gif" style="height: 42px;">
-                    <img src="assets/locknessMonsterNesse.gif" style="height: 42px;">
-                    <img src="assets/fish.gif" style="height: 36px;">
-                </div>
+                            <p>
+                                Not everything deserves access to you, and not every refusal is a loss. <em>"He who has
+                                    a why to live can bear almost any how."</em>
+                            </p>
+                        </article>
+                    </details>
+                </section>
+            </div>
+
+            <div class="stamp_row">
+                <img src="assets/jellyfish.gif" alt="Animated jellyfish">
+                <img src="assets/locknessMonsterNesse.gif" alt="Animated lake monster">
+                <img src="assets/fish.gif" alt="Animated fish">
             </div>
         </div>
+    </main>
 </body>
 
 </html>
