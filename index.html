@@ -304,6 +304,7 @@
             var link = document.getElementById('site-float-panel-link');
             var spotlightIndex = 0;
             var countdownIntervalId = null;
+            var shouldAutoOpenPanel = window.matchMedia('(min-width: 641px)').matches;
             var spotlights = [
                 {
                     label: 'Thought Zone panel',
@@ -460,6 +461,11 @@
                     hidePanel();
                 }
             });
+
+            if (!shouldAutoOpenPanel) {
+                hidePanel();
+                return;
+            }
 
             spotlightIndex = Math.floor(Math.random() * spotlights.length);
             applySpotlight(spotlightIndex);

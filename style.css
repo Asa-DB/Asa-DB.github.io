@@ -23,6 +23,7 @@ html {
 body {
     margin: 0;
     min-width: 320px;
+    overflow-x: hidden;
     font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif;
     background-color: #000;
     color: #fff;
@@ -77,6 +78,7 @@ summary:focus-visible {
 
 .page_shell {
     position: relative;
+    overflow-x: clip;
 }
 
 .inside,
@@ -109,6 +111,11 @@ summary:focus-visible {
     text-transform: uppercase;
     letter-spacing: 1px;
     border-bottom: 3px ridge #fff;
+}
+
+.window_titlebar span {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .window_dots {
@@ -237,6 +244,7 @@ summary:focus-visible {
     font-size: 13px;
     text-transform: uppercase;
     box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.45);
+    overflow-wrap: anywhere;
 }
 
 .retro_button:hover,
@@ -582,6 +590,13 @@ summary:focus-visible {
     color: #fff799;
     display: inline-block;
     min-width: 90px;
+}
+
+.contact_list a,
+.site_float_panel h2,
+.site_float_panel_text,
+.site_float_panel_meta {
+    overflow-wrap: anywhere;
 }
 
 .contact_note h3 {
@@ -1283,7 +1298,14 @@ summary:focus-visible {
     }
 
     .site_float_panel {
-        width: calc(100vw - 24px);
+        left: 12px;
+        right: 12px;
+        top: auto;
+        bottom: 12px;
+        width: auto;
+        transform: none;
+        max-height: calc(100vh - 24px);
+        overflow-y: auto;
     }
 
     .site_float_panel_inner {
@@ -1298,8 +1320,26 @@ summary:focus-visible {
         font-size: 24px;
     }
 
+    .site_float_panel_link,
+    .site_float_panel_secondary {
+        display: block;
+        width: 100%;
+        margin: 10px 0 0;
+    }
+
+    .site_float_panel_secondary {
+        margin-left: 0;
+    }
+
+    .window_titlebar,
+    .post_heading_row {
+        flex-wrap: wrap;
+    }
+
     .service_table,
     .retro_table {
+        display: block;
+        overflow-x: auto;
         border-spacing: 4px;
     }
 }
